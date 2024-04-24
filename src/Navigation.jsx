@@ -9,20 +9,20 @@ function Navigation() {
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
           <Link className="navbar-brand" to="/">
-            CM
+            LOGO
           </Link>
           <Nav className="me-auto">
             <Link className="nav-link" to="/about">
-              About
+              Our Story
             </Link>
-            <Link className="nav-link" to="/about">
-              Blog
+            <Link className="nav-link" to="/menu">
+              Menu
             </Link>
-            <Link className="nav-link" to="/about">
-              Projects
+            <Link className="nav-link" to="/gallery">
+              Gallery
             </Link>
-            <Link className="nav-link" to="/about">
-              Resume
+            <Link className="nav-link" to="/contact">
+              Contact
             </Link>
           </Nav>
         </Container>

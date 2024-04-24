@@ -15,8 +15,11 @@ import App from './App'
 import ErrorPage from './ErrorPage'
 import Header from './Header'
 import Footer from './Footer'
-import Navigation from "./Navigation";
-import { Navbar } from 'react-bootstrap'
+import Navigation from "./Navigation"
+// import { Navbar } from 'react-bootstrap'
+import Menu from "./Menu"
+import Gallery from "./Gallery"
+import Contact from "./Contact" 
 
 const site = import.meta.env.BASE_URL
 
@@ -34,25 +37,40 @@ function Layout() {
   );
 }
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "/",
+          element: <App />,
+          errorElement: <ErrorPage />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/menu",
+          element: <Menu />,
+        },
+        {
+          path: "/gallery",
+          element: <Gallery />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
+        },
+      ],
+    },
+  ],
   {
-    element: <Layout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/',
-        element: <App />,
-        errorElement: <ErrorPage />
-      },
-      {
-        path: '/about',
-        element: <About />
-      },
-    ]
+    basename: site,
   }
-], {
-  basename: site
-})
+);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />
