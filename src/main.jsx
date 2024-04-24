@@ -15,6 +15,7 @@ import App from './App'
 import ErrorPage from './ErrorPage'
 import Header from './Header'
 import Footer from './Footer'
+import { Navbar } from 'react-bootstrap'
 
 const site = import.meta.env.BASE_URL
 
@@ -22,7 +23,8 @@ const site = import.meta.env.BASE_URL
 function Layout() {
   return (
       <>
-        <Header />
+      <Header />
+      <Navbar />
         <div id='page-content'>
           <Outlet />
         </div>

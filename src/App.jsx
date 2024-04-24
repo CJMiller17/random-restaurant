@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import NavBar from "./Navbar"
 
 const Title = () => {
   return (
@@ -11,7 +11,7 @@ const Title = () => {
 function App() {
   return (
     <div className="p-5">
-      <Link to='/about'>About</Link>
+      <Navbar />
       <Title />
     </div>
   )
