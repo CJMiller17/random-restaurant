@@ -15,6 +15,7 @@ import App from './App'
 import ErrorPage from './ErrorPage'
 import Header from './Header'
 import Footer from './Footer'
+import Navigation from "./Navigation";
 import { Navbar } from 'react-bootstrap'
 
 const site = import.meta.env.BASE_URL
@@ -22,15 +23,15 @@ const site = import.meta.env.BASE_URL
 
 function Layout() {
   return (
-      <>
+    <>
       <Header />
-      <Navbar />
-        <div id='page-content'>
-          <Outlet />
-        </div>
-        <Footer />
-      </>
-  )
+      <Navigation />
+      <div id="page-content">
+        <Outlet />
+      </div>
+      <Footer />
+    </>
+  );
 }
 
 const router = createBrowserRouter([

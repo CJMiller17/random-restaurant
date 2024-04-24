@@ -1,17 +1,15 @@
-import NavBar from "./Navbar"
-
 const Title = () => {
   return (
-    <h1>
-      Hello World!
-    </h1>
-  )
+    <>
+      <h1>Hello World!</h1>
+      <p> Here is some things that can be put in there </p>
+    </>
+  );
 }
 
 function App() {
   return (
     <div className="p-5">
-      <Navbar />
       <Title />
     </div>
   )
