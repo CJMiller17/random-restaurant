@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function FoodieApiCall() {
-
-}
-
-function Menu() {
+function Menu({ searchResults }) {
   const [foodie, setFoodie] = useState([]);
 
   useEffect(() => {
@@ -88,7 +84,6 @@ function Menu() {
           </section>
         </div>
       </div>
-      <FoodieApiCall />
     </>
   );
 }
