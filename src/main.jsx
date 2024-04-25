@@ -16,7 +16,6 @@ import ErrorPage from './ErrorPage'
 import Header from './Header'
 import Footer from './Footer'
 import Navigation from "./Navigation"
-// import { Navbar } from 'react-bootstrap'
 import Menu from "./Menu"
 import Gallery from "./Gallery"
 import Contact from "./Contact" 

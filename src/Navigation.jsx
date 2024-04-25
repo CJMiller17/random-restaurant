@@ -7,8 +7,6 @@ import Searchbar from "./Searchbar";
 import Menu from "./Menu";
 
 function Navigation() {
-  
-  const [searchResults, setSearchResults] = useState([]);
 
   return (
     <>
@@ -31,10 +29,9 @@ function Navigation() {
               Contact
             </Link>
           </Nav>
-          <Searchbar setSearchResults={setSearchResults} />
         </Container>
       </Navbar>
-      <Menu searchResults={searchResults} />
+      {/* <Menu searchResults={searchResults} /> */}
     </>
   );
 }

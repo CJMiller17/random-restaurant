@@ -1,26 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
+
 function Searchbar({setSearchResults}) {
     const [query, setQuery] = useState("");
-
-    const fetchAPI = (value) => {
+    useEffect(() => {
+        fetchAPI();
+    }, [query])
+    const fetchAPI = () => {
         fetch("https://www.jsonkeeper.com/b/MDXW")
-            .then((response) => response.json())
-            .then(json => {
-                console.log("JSON: ", json);
-                const searchResults = json.filter((entry) => {
-                    return (
-                      value &&
+        .then((response) => response.json())
+        .then(json => {
+            console.log("JSON: ", json);
+            const searchResults = json.filter((entry) => {
+                console.log("HERE!!!", query, entry)
+                return (
+                    query &&
                       entry &&
                         (
-                            entry.title.toLowerCase().includes(value) ||
-                            entry.description.toLowerCase().includes(value) ||
-                            entry.category.toLowerCase().includes(value) ||
-                            entry.cuisine_type.toLowerCase().includes(value)
+                            entry.title.toLowerCase().includes(query) ||
+                            entry.description.toLowerCase().includes(query) ||
+                            entry.category.toLowerCase().includes(query) ||
+                            entry.cuisine_type.toLowerCase().includes(query)
                         )
                     );
                 });
@@ -31,7 +35,6 @@ function Searchbar({setSearchResults}) {
 
     const handleChange = (value) => {
         setQuery(value)
-        fetchAPI(value)
     };
 
     return (
