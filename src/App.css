@@ -1,7 +1,4 @@
-html {
-  height: 100%;
-}
-body {
+/* html {
   height: 100%;
 }
 #root {
@@ -9,7 +6,7 @@ body {
   height: 100%;
   flex-direction: column;
   justify-content: center;
-}
-#page-content {
+} */
+/* #page-content {
   flex-grow: 2;
-}
+} */

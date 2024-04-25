@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 function Navigation() {
   return (
     <>
-      <Navbar bg="dark" data-bs-theme="dark">
+      <Navbar className="mb-2" bg="dark" data-bs-theme="dark" sticky="top">
         <Container>
           <Link className="navbar-brand" to="/">
             LOGO
