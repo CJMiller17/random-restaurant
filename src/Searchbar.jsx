@@ -8,40 +8,38 @@ import Button from "react-bootstrap/Button";
 function Searchbar({setSearchResults}) {
     const [query, setQuery] = useState("");
     
-        useEffect(() => {
-        fetchAPI();
-        }, [query]);
+    useEffect(() => {
+      fetchAPI();
+    }, [query]);
 
     const handleChange = (value) => {
         setQuery(value);
-        // fetchAPI(value);
     };
 
-    
-    const fetchAPI = (value) => {
-        fetch("https://www.jsonkeeper.com/b/MDXW")
-        .then((response) => response.json())
-        .then(json => {
-            console.log("JSON: ", json);
+    //This fetches the API
+    const fetchAPI = () => {
+        fetch(
+          "https://raw.githubusercontent.com/bootcamp-students/random-restaurant-json/main/foodList.json"
+        ) //This gets the response and allows me to use the filter method
+          //otherwise I get an error in the console but it doesn't break  
+          .then((response) => response.json())
+          .then((json) => {
             const searchResults = json.filter((entry) => {
-                console.log("HERE!!!", value, entry)
-                return (
-                    value &&
-                      entry &&
-                        (
-                            entry.title.toLowerCase().includes(value) ||
-                            entry.description.toLowerCase().includes(value) ||
-                            entry.category.toLowerCase().includes(value) ||
-                            entry.cuisine_type.toLowerCase().includes(value)
-                        )
-                    );
-                });
-                setSearchResults(searchResults);
-                console.log("Search Results: ", searchResults);
+              return (
+                //These are two guards that ensure there was a change & an entry
+                query &&
+                entry &&
+                (entry.title.toLowerCase().includes(query) ||
+                  entry.description.toLowerCase().includes(query) ||
+                  entry.category.toLowerCase().includes(query) ||
+                  entry.cuisine_type.toLowerCase().includes(query)
+                )
+              );
             });
+            setSearchResults(searchResults);
+            console.log("Search Results: ", searchResults);
+          });
     };
-
-    
 
     const handleSubmit = (e) => {
         e.preventDefault();

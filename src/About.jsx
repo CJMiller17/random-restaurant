@@ -1,5 +1,3 @@
-import caterpillar from "/src/hungy-logo.png"
-
 function About() {
   return (
     <div className="p-5">

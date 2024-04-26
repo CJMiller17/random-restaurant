@@ -6,12 +6,6 @@ import four from "/src/4.png";
 import five from "/src/5.png";
 import six from "/src/6.png";
 
-
-
-
-
-
-
 function Gallery() {
   return (
     <div className="p-5">

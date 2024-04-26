@@ -8,7 +8,9 @@ function Menu() {
 
   useEffect(() => {
     axios
-      .get("https://www.jsonkeeper.com/b/MDXW")
+      .get(
+        "https://raw.githubusercontent.com/bootcamp-students/random-restaurant-json/main/foodList.json"
+      )
       .then(function (foodie) {
         console.log(foodie);
         setFoodie(foodie.data);
@@ -16,26 +18,27 @@ function Menu() {
       .catch(function (spoiledFood) {
         console.log("Foodie error: ", spoiledFood);
       })
-      .finally(function () {
-        //Always executed
-      });
   }, []);
   useEffect(() => { 
     console.log("Use Effect: ", searchResults)
   }, [searchResults])
-  
+
+  //This filters the API call object by category
   const starters = foodie.filter((item) => item.category === "Appetizer")
   const breakfast = foodie.filter((item) => item.category === "Breakfast");
   const lunch = foodie.filter((item) => item.category === "Lunch");
   const dinner = foodie.filter((item) => item.category === "Dinner");
   const drink = foodie.filter((item) => item.category === "Drink");
 
+  //This will use a ternary function to display the original Menu or the altered Menu
   return (
     <>
+      {/* This pulls in the searchabr component */}
       <Searchbar setSearchResults={setSearchResults} />
       <div className="container">
         {searchResults.length > 0 ? (
           <div>
+            {/* This displays the customized menu */}
             <section className="col-5 m-2 p-3 border">
               <h3 className="text-center">Starters</h3>
               {searchResults.map((item) => (
@@ -48,7 +51,7 @@ function Menu() {
             </section>
           </div>
         ) : (
-          //loop through search results
+          //This displays the standard Menu
           <div>
             <div className="row justify-content-between">
               <section className="col-5 m-2 p-3 border">
