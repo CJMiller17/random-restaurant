@@ -16,7 +16,9 @@ function Navigation() {
         sticky="top"
       >
         <Container className="d-flex justify-content-start m-0">
-          <img src={caterpillar} height={42} />
+          <Link to="/">
+            <img src={caterpillar} height={42} />
+          </Link>
           <Nav className="">
             <Link className="nav-link align-content-center" to="/about">
               Our Story

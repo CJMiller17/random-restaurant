@@ -3,7 +3,7 @@ import caterpillar from "/src/hungy-logo.png"
 function About() {
   return (
     <div className="p-5">
-      <h1>Hungry Little Caterpillar</h1>
+      <h1>The Hungry little Caterpillar </h1>
       <h2>He ate something different each day</h2>
       <p>
         Monday: The caterpillar eats through one apple. <br></br>
