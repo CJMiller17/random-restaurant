@@ -7,40 +7,50 @@ import Button from "react-bootstrap/Button";
 
 function Searchbar({setSearchResults}) {
     const [query, setQuery] = useState("");
-    useEffect(() => {
+    
+        useEffect(() => {
         fetchAPI();
-    }, [query])
-    const fetchAPI = () => {
+        }, [query]);
+
+    const handleChange = (value) => {
+        setQuery(value);
+        // fetchAPI(value);
+    };
+
+    
+    const fetchAPI = (value) => {
         fetch("https://www.jsonkeeper.com/b/MDXW")
         .then((response) => response.json())
         .then(json => {
             console.log("JSON: ", json);
             const searchResults = json.filter((entry) => {
-                console.log("HERE!!!", query, entry)
+                console.log("HERE!!!", value, entry)
                 return (
-                    query &&
+                    value &&
                       entry &&
                         (
-                            entry.title.toLowerCase().includes(query) ||
-                            entry.description.toLowerCase().includes(query) ||
-                            entry.category.toLowerCase().includes(query) ||
-                            entry.cuisine_type.toLowerCase().includes(query)
+                            entry.title.toLowerCase().includes(value) ||
+                            entry.description.toLowerCase().includes(value) ||
+                            entry.category.toLowerCase().includes(value) ||
+                            entry.cuisine_type.toLowerCase().includes(value)
                         )
                     );
                 });
-                console.log("Search Results: ", searchResults);
                 setSearchResults(searchResults);
+                console.log("Search Results: ", searchResults);
             });
     };
 
-    const handleChange = (value) => {
-        setQuery(value)
+    
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
     };
 
     return (
       <div>
-        <Form>
-          <Row>
+        <Form onSubmit={handleSubmit}>
+          <Row className="align-items-center justify-content-start p-2 ms-4">
             <Col xs="auto">
               <Form.Control
                 type="text"
@@ -51,7 +61,17 @@ function Searchbar({setSearchResults}) {
               />
             </Col>
             <Col xs="auto">
-              <Button type="submit">Submit</Button>
+              <Button
+                className="btn-sm mt-1"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right, #007642ff, #87BD5Cff, #87BD5Cff, #CC2439ff)",
+                  borderColor: "#87BD5Cff",
+                }}
+                type="submit"
+              >
+                Submit
+              </Button>
             </Col>
           </Row>
         </Form>

@@ -35,7 +35,18 @@ function Menu() {
       <Searchbar setSearchResults={setSearchResults} />
       <div className="container">
         {searchResults.length > 0 ? (
-          <div className="thing">sdfgdfssfgfd</div>
+          <div>
+            <section className="col-5 m-2 p-3 border">
+              <h3 className="text-center">Starters</h3>
+              {searchResults.map((item) => (
+                <div key={item.id}>
+                  <p className="title">{item.title}</p>
+                  <p className="description">{item.description}</p>
+                  <p className="price">{item.price}</p>
+                </div>
+              ))}
+            </section>
+          </div>
         ) : (
           //loop through search results
           <div>
@@ -44,8 +55,9 @@ function Menu() {
                 <h3 className="text-center">Starters</h3>
                 {starters.map((item) => (
                   <div key={item.id}>
-                    <p>{item.title}</p>
-                    <p>{item.description}</p>
+                    <p className="title">{item.title}</p>
+                    <p className="description">{item.description}</p>
+                    <p className="price">{item.price}</p>
                   </div>
                 ))}
               </section>
@@ -54,8 +66,9 @@ function Menu() {
                 <h3 className="text-center">Breakfast</h3>
                 {breakfast.map((item) => (
                   <div key={item.id}>
-                    <p>{item.title}</p>
-                    <p>{item.description}</p>
+                    <p className="title">{item.title}</p>
+                    <p className="description">{item.description}</p>
+                    <p className="price">{item.price}</p>
                   </div>
                 ))}
               </section>
@@ -66,8 +79,9 @@ function Menu() {
                 <h2>Lunch</h2>
                 {lunch.map((item) => (
                   <div key={item.id}>
-                    <p>{item.title}</p>
-                    <p>{item.description}</p>
+                    <p className="title">{item.title}</p>
+                    <p className="description">{item.description}</p>
+                    <p className="price">{item.price}</p>
                   </div>
                 ))}
               </main>
@@ -75,21 +89,23 @@ function Menu() {
 
             <div className="row justify-content-between">
               <section className="col-5 m-2 p-3 border">
-                <h3>Dinner</h3>
+                <h3 className="text-center">Dinner</h3>
                 {dinner.map((item) => (
                   <div key={item.id}>
-                    <p>{item.title}</p>
-                    <p>{item.description}</p>
+                    <p className="title">{item.title}</p>
+                    <p className="description">{item.description}</p>
+                    <p className="price">{item.price}</p>
                   </div>
                 ))}
               </section>
 
               <section className="col-5 m-2 p-3 border">
-                <h3>Drink</h3>
+                <h3 className="text-center">Drink</h3>
                 {drink.map((item) => (
                   <div key={item.id}>
-                    <p>{item.title}</p>
-                    <p>{item.description}</p>
+                    <p className="title">{item.title}</p>
+                    <p className="description">{item.description}</p>
+                    <p className="price">{item.price}</p>
                   </div>
                 ))}
               </section>

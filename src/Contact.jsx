@@ -1,9 +1,9 @@
 function Contact() {
   return (
     <div className="p-5">
-      <h1>A Little About Us</h1>
-      <h2>Some more about us</h2>
-      <p>Things that may be interesting to know.</p>
+      <h1>Dont Call Us</h1>
+      <h2>We will call you</h2>
+      <p>The caterpillar ate all of our food. </p>
     </div>
   );
 }
