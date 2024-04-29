@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+// import Menu from "./Menu";
 
 
 function Searchbar({setSearchResults}) {
@@ -16,7 +17,7 @@ function Searchbar({setSearchResults}) {
         setQuery(value);
     };
 
-    //This fetches the API
+    // This fetches the API
     const fetchAPI = () => {
         fetch(
           "https://raw.githubusercontent.com/bootcamp-students/random-restaurant-json/main/foodList.json"
