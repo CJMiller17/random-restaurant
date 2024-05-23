@@ -18,6 +18,7 @@ import Navigation from "./Navigation"
 import Menu from "./Menu"
 import Gallery from "./Gallery"
 import Contact from "./Contact" 
+import Order from "./Order" 
 
 const site = import.meta.env.BASE_URL
 
@@ -56,6 +57,10 @@ const router = createBrowserRouter(
         {
           path: "/gallery",
           element: <Gallery />,
+        },
+        {
+          path: "/order",
+          element: <Order />,
         },
         {
           path: "/contact",

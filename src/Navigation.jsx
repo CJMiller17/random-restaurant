@@ -29,6 +29,9 @@ function Navigation() {
             <Link className="nav-link align-content-center" to="/gallery">
               Gallery
             </Link>
+            <Link className="nav-link align-content-center" to="/order">
+              Place Order
+            </Link>
             <Link className="nav-link align-content-center" to="/contact">
               Contact
             </Link>
