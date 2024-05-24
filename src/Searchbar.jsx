@@ -10,19 +10,20 @@ function Searchbar({setSearchResults}) {
     const [query, setQuery] = useState("");
     
     useEffect(() => {
-      fetchAPI();
+      if (query) {
+        fetchAPI()
+      }
     }, [query]);
 
-    const handleChange = (value) => {
-        setQuery(value);
+    const handleChange = (e) => {
+        setQuery(e.target.value);
     };
 
     // This fetches the API
     const fetchAPI = () => {
-        fetch(
-          "https://raw.githubusercontent.com/bootcamp-students/random-restaurant-json/main/foodList.json"
-        ) //This gets the response and allows me to use the filter method
-          //otherwise I get an error in the console but it doesn't break  
+      fetch("http://127.0.0.1:8000/foodItem")
+      //This gets the response and allows me to use the filter method
+          //otherwise I get an error in the console but it doesn't break
           .then((response) => response.json())
           .then((json) => {
             const searchResults = json.filter((entry) => {
@@ -30,20 +31,24 @@ function Searchbar({setSearchResults}) {
                 //These are two guards that ensure there was a change & an entry
                 query &&
                 entry &&
-                (entry.title.toLowerCase().includes(query) ||
-                  entry.description.toLowerCase().includes(query) ||
-                  entry.category.toLowerCase().includes(query) ||
-                  entry.cuisine_type.toLowerCase().includes(query)
+                (
+                  entry.name.toLowerCase().includes(query.toLowerCase()) ||
+                  entry.desc.toLowerCase().includes(query.toLowerCase()) ||
+                  entry.category.toLowerCase().includes(query.toLowerCase())
                 )
               );
             });
             setSearchResults(searchResults);
             console.log("Search Results: ", searchResults);
-          });
+          })
+        .catch((error) => {
+          console.log("Error fetching data: ", error);
+        });
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+      e.preventDefault();
+      fetchAPI(); //Calls the API on submit as well
     };
 
     return (
@@ -55,7 +60,7 @@ function Searchbar({setSearchResults}) {
                 type="text"
                 placeholder="Search Food"
                 value={query}
-                onChange={(e) => handleChange(e.target.value)}
+                onChange={handleChange}
                 className=" mr-sm-2"
               />
             </Col>

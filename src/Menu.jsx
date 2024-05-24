@@ -39,7 +39,7 @@ function Menu() {
           <div>
             {/* This displays the customized menu */}
             <section className="col-5 m-2 p-3 border">
-              <h3 className="text-center">Starters</h3>
+              <h3 className="text-center">Search Results</h3>
               {searchResults.map((item) => (
                 <div key={item.id}>
                   <p className="title">{item.name}</p>
