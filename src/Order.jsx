@@ -40,30 +40,38 @@ function Order() {
   };
 
   const handleChange = (e, index) => {
+    // Name is the name of the input field to keep things straight. Thats an AHA. The value is the actual entry
     const { name, value } = e.target;
-    const newFormData = { ...formData };
+    const newFormData = { ...formData }; //Variable used to help update state and not be 1 behind.
+
+    // Has to treat foodItems differently because its an array
     if (name === "foodItem") {
       newFormData.foodItems[index].id = value;
     } else if (name === "qty") {
       newFormData.foodItems[index].qty = value;
     } else {
+      // Handles all other forms of information 
       newFormData[name] = value;
     }
     setFormData(newFormData);
   };
 
   const handleAddFoodItem = () => {
+    // Triggers rerender to show the food item added
     setFormData({
       ...formData,
-      foodItems: [...formData.foodItems, { id: "", qty: 1 }],
+      // foodItems gets all the properties of formData into it
+      // Comma represents the aspect you are updating
+      foodItems: [...formData.foodItems, { id: "", qty: 1 }], // New Food Item from form
     });
   };
 
 const handleSubmit = (e) => {
   e.preventDefault();
 
-  // Step 1: Send customer data to the customer endpoint
+  // Sends customer data to the customer endpoint
   axios
+    // The post creates the customer object. The keys correspond to the database while the values correspond to the state object
     .post("http://127.0.0.1:8000/customers/", {
       first_name: formData.firstName,
       last_name: formData.lastName,
@@ -74,11 +82,14 @@ const handleSubmit = (e) => {
       state: formData.state,
       zipcode: formData.zipcode,
     })
-    .then((customerResponse) => {
-      const customerData = customerResponse.data;
-      console.log("Customer created with ID:", customerData.id);
 
-      // Step 2: Send order details to the order details endpoint
+    .then((customerResponse) => {
+      // The server sends back a response. The POST isn't just a one way street, which makes sense why we can get 400 errors
+      const customerData = customerResponse.data;
+      console.log("Customer created with ID:", customerData.id); // The id is coming from the database
+
+      // Sends order details to the order details endpoint
+      // Maps over the foodItems array because there can be many foodItems from the form
       const orderDetailsPromises = formData.foodItems.map((item) =>
         axios.post("http://127.0.0.1:8000/order_details/", {
           food_id: item.id,
@@ -88,24 +99,24 @@ const handleSubmit = (e) => {
         })
       );
 
+      // Promise. Then. Return. Waits for all the promises to come back resolved. They come back with their database object info and the customer id
       return Promise.all(orderDetailsPromises).then(
         (orderDetailsResponses) => ({
           orderDetailsResponses,
-          customerId: customerData.id,
+          customerId: customerData.id, // Linked from previous response
         })
       );
     })
-    .then(({ orderDetailsResponses, customerId }) => {
+
+    .then(({ orderDetailsResponses, customerId }) => {  // Passes order details and customer id from previous response. Dont have to deal with nested object
       const orderDetailsIds = orderDetailsResponses.map(
-        (response) => response.data.id
+        (response) => response.data.id //Relates to the foodItem array
       );
-      console.log("Order details created with IDs:", orderDetailsIds);
 
-      // Ensure `customerId` is correctly passed to the order creation request
-      console.log("Customer ID being used for order creation:", customerId);
-
-      // Step 3: Create the order using customer and order details
+      // Creates the order using customer and order details
       return axios.post("http://127.0.0.1:8000/orders/", {
+        
+        // Fed from the Order Details Response
         name: customerId,
         status: "Received", // Ensure this matches one of the choices in STATUS
         delivery: false, // or set this dynamically based on form input if applicable
@@ -113,9 +124,7 @@ const handleSubmit = (e) => {
         food_items: orderDetailsIds, // List of order detail IDs
       });
     })
-    .then((orderResponse) => {
-      console.log("Order created successfully: ", orderResponse.data);
-    })
+
     .catch((error) => {
       console.error(
         "Error creating order: ",

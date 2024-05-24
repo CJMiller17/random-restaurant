@@ -20,30 +20,32 @@ function Searchbar({setSearchResults}) {
     };
 
     // This fetches the API
-    const fetchAPI = () => {
+  const fetchAPI = () => {
+    // #########################################
+    // Just changed the URL
       fetch("http://127.0.0.1:8000/foodItem")
+        // #########################################
+        
       //This gets the response and allows me to use the filter method
-          //otherwise I get an error in the console but it doesn't break
-          .then((response) => response.json())
-          .then((json) => {
-            const searchResults = json.filter((entry) => {
-              return (
-                //These are two guards that ensure there was a change & an entry
-                query &&
-                entry &&
-                (
-                  entry.name.toLowerCase().includes(query.toLowerCase()) ||
-                  entry.desc.toLowerCase().includes(query.toLowerCase()) ||
-                  entry.category.toLowerCase().includes(query.toLowerCase())
-                )
-              );
-            });
-            setSearchResults(searchResults);
-            console.log("Search Results: ", searchResults);
-          })
-        .catch((error) => {
-          console.log("Error fetching data: ", error);
+      //otherwise I get an error in the console but it doesn't break
+      .then((response) => response.json())
+      .then((json) => {
+        const searchResults = json.filter((entry) => {
+          return (
+            //These are two guards that ensure there was a change & an entry
+            query &&
+            entry &&
+            (entry.name.toLowerCase().includes(query.toLowerCase()) ||
+              entry.desc.toLowerCase().includes(query.toLowerCase()) ||
+              entry.category.toLowerCase().includes(query.toLowerCase()))
+          );
         });
+        setSearchResults(searchResults);
+        console.log("Search Results: ", searchResults);
+      })
+      .catch((error) => {
+        console.log("Error fetching data: ", error);
+      });
     };
 
     const handleSubmit = (e) => {

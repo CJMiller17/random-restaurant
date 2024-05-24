@@ -8,6 +8,8 @@ function Menu() {
 
   useEffect(() => {
     axios
+      //#######################################################
+      // Literally just changed the URL to the backend. Didn't even change response name or anything
       .get("http://127.0.0.1:8000/foodItem")
       .then(function (foodie) {
         console.log(foodie);
@@ -17,17 +19,21 @@ function Menu() {
         console.log("Foodie error: ", spoiledFood);
       });
   }, []);
-  useEffect(() => { 
-    console.log("Use Effect: ", searchResults)
-  }, [searchResults])
+  useEffect(() => {
+    console.log("Use Effect: ", searchResults);
+  }, [searchResults]);
+  //#######################################################
 
+  //#######################################################
   //This filters the API call object by category
-  const starters = foodie.filter((item) => item.category === "Starters")
+  // I updated the item.BLANK to match the backend Object
+  const starters = foodie.filter((item) => item.category === "Starters");
   const breakfast = foodie.filter((item) => item.category === "Breakfast");
   const lunch = foodie.filter((item) => item.category === "Lunch");
   const dinner = foodie.filter((item) => item.category === "Dinner");
   const drink = foodie.filter((item) => item.category === "Drinks");
-    const dessert = foodie.filter((item) => item.category === "Desserts");
+  const dessert = foodie.filter((item) => item.category === "Desserts"); // Not used in display but can be called. Like a secret menu
+  //#######################################################
 
   //This will use a ternary function to display the original Menu or the altered Menu
   return (
@@ -35,6 +41,7 @@ function Menu() {
       {/* This pulls in the searchabr component */}
       <Searchbar setSearchResults={setSearchResults} />
       <div className="container">
+        {/* Are there any search results? Display them versus the default MENU */}
         {searchResults.length > 0 ? (
           <div>
             {/* This displays the customized menu */}
@@ -42,9 +49,11 @@ function Menu() {
               <h3 className="text-center">Search Results</h3>
               {searchResults.map((item) => (
                 <div key={item.id}>
+                  {/* ########################################## Just updated the item.BLANK */}
                   <p className="title">{item.name}</p>
                   <p className="description">{item.desc}</p>
                   <p className="price">{item.price}</p>
+                  {/* ########################################## */}
                 </div>
               ))}
             </section>
